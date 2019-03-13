@@ -1,0 +1,5 @@
+declare module 'react-redux'
+declare module 'redux-logger'
+declare module 'redux-thunk'
+declare module 'lodash'
+declare module 'redux-seamless-immutable'

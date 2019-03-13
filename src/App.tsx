@@ -1,8 +1,28 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {connect} from 'react-redux';
+import * as TodoActions from './action';
+import { bindActionCreators } from 'redux';
+import SubComponent from './SubComponent';
 
-class App extends Component {
+export interface AppProps extends React.Props<any> {
+  removeTodo: (text: string) => void,
+  todo: {
+    text: string
+  }
+}
+
+interface LocalProps extends React.Props<any> {
+  addTodo: (text: string) => void
+}
+
+class App extends Component<AppProps & LocalProps, any> {
+
+  constructor (props: any) {
+    super(props)
+  }
+
   render() {
     return (
       <div className="App">
@@ -13,16 +33,33 @@ class App extends Component {
           </p>
           <a
             className="App-link"
-            href="https://reactjs.org"
+            onClick={() => this.props.addTodo('test')}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+          Click HERE to ADD 
           </a>
+          <SubComponent removeTodo={this.props.removeTodo} todo={this.props.todo} />
         </header>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps: {} = (state: any) => {
+  return {
+    something: state.something,
+    todo: state.todo
+  }
+}
+
+// const mapDispatchToProps: {} = (dispatch: any) => {
+//   return {
+//     addTodo: (text: string) => dispatch(TodoActions.addTodo(text)),
+//     removeTodo: (id: string) => dispatch(TodoActions.removeTodo(id))
+//   }
+// }
+
+const mapDispatchToProps: {} = (dispatch: any) => bindActionCreators(TodoActions, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

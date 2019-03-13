@@ -1,0 +1,23 @@
+{
+    "ok": false,
+    "status": "200",
+    "data": {
+        "location": "Jersey Garden",
+        "movieList": [
+            {
+                "title": "Wandering Earth",
+                "timeSlots": [
+                    "Tuesday",
+                    "Friday"
+                ]
+            },
+            {
+                "title": "Lego",
+                "timeSlots": [
+                    "Thursday",
+                    "Saturday"
+                ]
+            }
+        ]
+    }
+}
