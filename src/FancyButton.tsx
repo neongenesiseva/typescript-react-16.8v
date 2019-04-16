@@ -9,4 +9,4 @@ const FancyButton = React.forwardRef((props: {title?: string, clickFunc: any}, r
     )
 })
 
-export default React.memo(FancyButton, (prev, next) => { console.log('check fancy button rendering'); return false})
+export default React.memo(FancyButton, (prev, next) => { console.log('check fancy button rendering', prev.clickFunc.toString() === next.clickFunc.toString()); return prev.title === next.title || prev.clickFunc.toString() === next.clickFunc.toString()})

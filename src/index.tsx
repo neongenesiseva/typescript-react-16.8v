@@ -8,12 +8,15 @@ import {logger} from 'redux-logger';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import reducer from './reducer';
+import ErrorBoundary from './ErrorBoundary';
 
 const store = createStore(reducer, applyMiddleware(thunk, logger))
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <ErrorBoundary>
+            <App />
+        </ErrorBoundary>
     </Provider>,
     document.getElementById('root')
 );
