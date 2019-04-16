@@ -1,9 +1,10 @@
 import React from 'react';
 import {AppProps} from './App';
+import AnotherComponent from './AnotherComponent';
 
 class SubComponent extends React.Component<AppProps> {
 
-    componentDidMount () {
+    public static componentDidMount () {
         // window.fetch('someThing.json', {
         //     method: 'GET',
         //     headers: {
@@ -36,11 +37,12 @@ class SubComponent extends React.Component<AppProps> {
         }
     }
 
-    render () {
+    public render () {
         return (
             <>
                 <button onClick={() => this.props.removeTodo('test')}>delete</button>
                 Learn React {this.props.todo.text}
+                <AnotherComponent removeTodo={() => {}} todo={this.props.todo}/>
             </>
         )
     }
