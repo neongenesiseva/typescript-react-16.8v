@@ -1,10 +1,11 @@
 import React from 'react';
 import {AppProps} from './App';
 import AnotherComponent from './AnotherComponent';
+import HookTest from './HookTest';
 
 class SubComponent extends React.Component<AppProps> {
 
-    public static componentDidMount () {
+    private static componentDidMount () {
         // window.fetch('someThing.json', {
         //     method: 'GET',
         //     headers: {
@@ -43,6 +44,7 @@ class SubComponent extends React.Component<AppProps> {
                 <button onClick={() => this.props.removeTodo('test')}>delete</button>
                 Learn React {this.props.todo.text}
                 <AnotherComponent removeTodo={() => {}} todo={this.props.todo}/>
+                <HookTest />
             </>
         )
     }

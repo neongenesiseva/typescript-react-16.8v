@@ -1,6 +1,7 @@
 import React, {useState, useEffect, ChangeEvent, createRef, RefObject, memo} from 'react';
 import {AppProps} from './App';
 import FancyButton from './FancyButton';
+import {useStyle} from './styleHook'
 
 function getRandomColor(): string {
     let letters = '0123456789ABCDEF';
@@ -10,10 +11,14 @@ function getRandomColor(): string {
     }
     return color;
 }
+
 const AnotherComponent = (props: AppProps) => {
 
     const [count, setCount] = useState(0)
-    const [styles, setStyles] = useState('black')
+    const styles = useStyle(count)
+    // this hook will automatically update since function component will upate from root
+    // using hooks should follow the naming convention, use* will indicate this is a hook, so
+    // we can imply that the useEffect in outside will trigger the updates happen inside.
     const [todo, setTodo] = useState(props.todo)
     const ref:RefObject<HTMLSpanElement> = createRef()
 
@@ -21,8 +26,6 @@ const AnotherComponent = (props: AppProps) => {
     // this should be treat as the native lifecycles.
     useEffect(() => {
         // immediately after render, acts like componentDidUpdate or componentWillUpdate(_unsafe)
-        console.log('useEffect')
-        count % 2 ? setStyles('red') : setStyles('black')
         setTodo(props.todo)
         try {
             ref.current ? ref.current.style.color = getRandomColor() : null
@@ -31,7 +34,6 @@ const AnotherComponent = (props: AppProps) => {
         }
     })
     // acts like render
-    console.log('component')
     return (
         <>
             <input placeholder='someInput' value={count || ''} style={{color: styles}} onChange={(e: ChangeEvent<HTMLInputElement>) => {setCount(Number(e.target.value))}}/>
